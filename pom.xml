@@ -10,15 +10,8 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>
-            rabbitmq
-        </module>
-        <module>
-            proscenium
-        </module>
-        <module>
-            Chapter6
-        </module>
+        <module>proscenium</module>
+        <module>back</module>
     </modules>
 
 
