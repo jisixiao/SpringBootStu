@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>Wopop</title>
+    <link th:href="@{/Wopop_files/style_log.css}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" th:href="@{/Wopop_files/style.css}">
+
+    <link th:href="@{bootstrap/css/bootstrap-theme.min.css}" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" th:href="@{/Wopop_files/userpanel.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/Wopop_files/jquery.ui.all.css}">
+
+
+</head>
+
+<body class="login" mycollectionplug="bind">
+<div class="login_m">
+    <div class="login_logo"><img src="./Wopop_files/logo.png" width="196" height="46"></div>
+    <div class="login_boder">
+
+        <div class="login_padding" id="login_model">
+
+            <h2>用户名</h2>
+            <label>
+                <input type="text" id="username" class="txt_input txt_input2" onfocus="if (value ==&#39;Your name&#39;){value =&#39;&#39;}" onblur="if (value ==&#39;&#39;){value=&#39;Your name&#39;}"
+                       value="Your name">
+            </label>
+            <h2>密码</h2>
+            <label>
+                <input type="password" name="textfield2" id="userpwd" class="txt_input" onfocus="if (value ==&#39;******&#39;){value =&#39;&#39;}" onblur="if (value ==&#39;&#39;){value=&#39;******&#39;}"
+                       value="******">
+            </label>
+
+
+            <p class="forgot"><a id="iforget" href="javascript:void(0);">忘 记 密 码?</a></p>
+            <div class="rem_sub">
+                <div class="rem_sub_l">
+                    <input type="checkbox" name="checkbox" id="save_me">
+                    <label for="checkbox">记住我</label>
+                </div>
+                <label>
+                    <input type="submit" class="sub_button" name="loginButton" id="button" value="登入" style="opacity: 0.7;">
+                </label>
+            </div>
+        </div>
+
+
+        <!--login_padding  Sign up end-->
+    </div><!--login_boder end-->
+</div><!--login_m end-->
+<script type="text/javascript" th:src="@{/js/jquery-2.1.1.min.js}"></script>
+<script type="text/javascript" language="JavaScript">
+
+    $("#loginButton").click(function () {
+        var username = $.trim($("#username").val());
+        var password = $.trim($("#userpwd").val());
+        if (username = ""){
+            alert("请输入用户名");
+            }
+        if (password = ""){
+            alert("请输入密码");
+            }
+   var data= {username:username,password:password};
+
+        $.ajax({
+
+            type:"post",
+            url:'/login/login',
+            dataType: 'json',
+            contentType:"application/json",
+            cache : false,
+            data: JSON.stringify(param),
+        });
+    });
+</script>
+
+
+</body>
+</html>

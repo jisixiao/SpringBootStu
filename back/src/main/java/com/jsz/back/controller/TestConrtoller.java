@@ -18,7 +18,7 @@ public class TestConrtoller {
     @RequestMapping("/view")
     public String view() {
         logger.info("测试Jsp");
-        return "/index";
+        return "/Wopop";
     }
 
 }
