@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
@@ -7,7 +7,7 @@
     <link th:href="@{/Wopop_files/style_log.css}" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" th:href="@{/Wopop_files/style.css}">
 
-    <link th:href="@{bootstrap/css/bootstrap-theme.min.css}" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" th:href="@{bootstrap/css/bootstrap-theme.min.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/Wopop_files/userpanel.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/Wopop_files/jquery.ui.all.css}">
 
@@ -40,7 +40,7 @@
                     <label for="checkbox">记住我</label>
                 </div>
                 <label>
-                    <input type="submit" class="sub_button" name="loginButton" id="button" value="登入" style="opacity: 0.7;">
+                    <input type="submit" class="sub_button" name="button" id="loginButton" value="登入" style="opacity: 0.7;">
                 </label>
             </div>
         </div>
@@ -49,30 +49,39 @@
         <!--login_padding  Sign up end-->
     </div><!--login_boder end-->
 </div><!--login_m end-->
-<script type="text/javascript" th:src="@{/js/jquery-2.1.1.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/jquery-2.1.1.min.js}" src="/static/js/jquery-2.1.1.min.js"></script>
 <script type="text/javascript" language="JavaScript">
-
-    $("#loginButton").click(function () {
-        var username = $.trim($("#username").val());
-        var password = $.trim($("#userpwd").val());
-        if (username = ""){
-            alert("请输入用户名");
+    $(function () {
+        $("#loginButton").click(function () {
+            var userName = $("#username").val().trim();
+            var userPwd = $("#userpwd").val().trim();
+            if("" == userName){
+                alert("用户名不允许为空");
             }
-        if (password = ""){
-            alert("请输入密码");
+            if("" == userPwd){
+                alert("密码不允许为空")
             }
-   var data= {username:username,password:password};
 
-        $.ajax({
+            var user = {
+                userName: userName,
+                userPwd:userPwd
+            };
+            var userName = $("#username").val().trim();
+            var userPwd = $("#userpwd").val().trim();
 
-            type:"post",
-            url:'/login/login',
-            dataType: 'json',
-            contentType:"application/json",
-            cache : false,
-            data: JSON.stringify(param),
+            $.ajax({
+                type: "POST",
+                url: "/login/login",
+                data: user,
+                async: false,
+                success: function (data) {
+                    alert(data);
+            }
+
+            })
         });
-    });
+    })
+
 </script>
 
 
